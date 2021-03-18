@@ -5,7 +5,7 @@ let baseURL = ''
 if (process.env.NODE_ENV === 'development') {
   baseURL = 'http://localhost:3003'
 } else {
-  baseURL = 'you heroku backend url here'
+  baseURL = 'https://holiday-app-api.herokuapp.com'
 }
 
 class NewForm extends Component {
@@ -37,16 +37,16 @@ class NewForm extends Component {
         this.setState({
           name: ''
         })
-      }).catch (error => console.log({'Error': error}))
+      }).catch(error => console.log({ 'Error': error }))
   }
 
-  render () {
+  render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit} >
           <label htmlFor='name'>Name:</label>
           <input type="text" name="name" id="name" onChange={this.handleChange} placeholder="add a holiday" value={this.state.name} />
-          <input type="submit" value="Add a Reason to Celebrate"/>
+          <input type="submit" value="Add a Reason to Celebrate" />
         </form>
       </div>
     )

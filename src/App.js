@@ -21,7 +21,7 @@ let baseURL = ''
 if (process.env.NODE_ENV === 'development') {
   baseURL = 'http://localhost:3003'
 } else {
-  baseURL = 'https://holiday-app-api.herokuapp.com/'
+  baseURL = 'https://holiday-app-api.herokuapp.com'
 }
 
 class App extends Component {
