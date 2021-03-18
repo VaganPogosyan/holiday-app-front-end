@@ -1,4 +1,4 @@
-import React, { Component } from 'react' 
+import React, { Component } from 'react'
 import NewForm from './components/NewForm'
 
 /*
@@ -9,10 +9,10 @@ If you want to try using this code style you can remove the existing
 fetch request and uncomment the blocks of code in the farious 
 API fetch methods. 
 */
-import { 
-  updateCelebratedRequest, 
-  updateLikesRequest, 
-  deleteRequest 
+import {
+  updateCelebratedRequest,
+  updateLikesRequest,
+  deleteRequest
 } from './services/api'
 
 
@@ -21,7 +21,7 @@ let baseURL = ''
 if (process.env.NODE_ENV === 'development') {
   baseURL = 'http://localhost:3003'
 } else {
-  baseURL = 'you heroku backend url here'
+  baseURL = 'https://holiday-app-api.herokuapp.com/'
 }
 
 class App extends Component {
@@ -62,23 +62,23 @@ class App extends Component {
       },
       body: JSON.stringify({ celebrated: !holiday.celebrated })
     }).then(res => res.json())
-    .then(resJson => {
-      console.log(resJson);
-      const copyHolidays = [...this.state.holidays];
-      const findIndex = this.state.holidays.findIndex(holiday => holiday._id === resJson._id);
-      copyHolidays[findIndex] = resJson;
-      
-      this.setState({
-        holidays: copyHolidays
-      });
-    })
+      .then(resJson => {
+        console.log(resJson);
+        const copyHolidays = [...this.state.holidays];
+        const findIndex = this.state.holidays.findIndex(holiday => holiday._id === resJson._id);
+        copyHolidays[findIndex] = resJson;
+
+        this.setState({
+          holidays: copyHolidays
+        });
+      })
 
     // updateCelebratedRequest(baseURL, holiday).then(updatedHoliday => {
     //   console.log(updatedHoliday);
     //   const copyHolidays = [...this.state.holidays];
     //   const findIndex = this.state.holidays.findIndex(holiday => holiday._id === updatedHoliday._id);
     //   copyHolidays[findIndex] = updatedHoliday;
-      
+
     //   this.setState({
     //     holidays: copyHolidays
     //   });
@@ -103,22 +103,22 @@ class App extends Component {
       },
       body: JSON.stringify({ likes: holiday.likes += 1 })
     }).then(res => res.json())
-    .then(resJson => {
-      console.log(resJson);
-      const copyHolidays = [...this.state.holidays];
-      const findIndex = this.state.holidays.findIndex(holiday => holiday._id === resJson._id);
-      copyHolidays[findIndex] = resJson;
-      
-      this.setState({
-        holidays: copyHolidays
-      });
-    })
+      .then(resJson => {
+        console.log(resJson);
+        const copyHolidays = [...this.state.holidays];
+        const findIndex = this.state.holidays.findIndex(holiday => holiday._id === resJson._id);
+        copyHolidays[findIndex] = resJson;
+
+        this.setState({
+          holidays: copyHolidays
+        });
+      })
     // updateLikesRequest(baseURL, holiday).then(updatedHoliday => {
     //   console.log(updatedHoliday);
     //   const copyHolidays = [...this.state.holidays];
     //   const findIndex = this.state.holidays.findIndex(holiday => holiday._id === updatedHoliday._id);
     //   copyHolidays[findIndex] = updatedHoliday;
-      
+
     //   this.setState({
     //     holidays: copyHolidays
     //   });
@@ -155,20 +155,20 @@ class App extends Component {
         <NewForm handleAddHoliday={this.handleAddHoliday} />
         <table>
           <tbody>
-            { this.state.holidays.map(holiday => {
+            {this.state.holidays.map(holiday => {
               return (
                 <tr key={holiday._id} >
-                  <td onDoubleClick={() => this.toggleCelebrated(holiday) }
-                      className={ holiday.celebrated ? 'celebrated' : null }
+                  <td onDoubleClick={() => this.toggleCelebrated(holiday)}
+                    className={holiday.celebrated ? 'celebrated' : null}
                   >
-                    { holiday.name } 
+                    {holiday.name}
                   </td>
                   <td> {holiday.likes} </td>
-                  <td onClick={ () => this.updateLikes(holiday) }> UPDATE (Likes) </td>
-                  <td onClick={ () => this.deleteHoliday(holiday._id) }>X</td>
+                  <td onClick={() => this.updateLikes(holiday)}> UPDATE (Likes) </td>
+                  <td onClick={() => this.deleteHoliday(holiday._id)}>X</td>
                 </tr>
               )
-              })
+            })
             }
           </tbody>
         </table>
